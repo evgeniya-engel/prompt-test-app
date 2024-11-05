@@ -4,11 +4,9 @@ import ast
 
 import openai
 import prompt_library
-
-# Load environment variables from .env file
  
 # Access the environment variables
-openai.api_key = st.secrets('OPENAI_API_KEY')
+openai.api_key = st.secrets["API_KEY"]
 client = openai.OpenAI()
 
 if 'completion_skills' not in st.session_state:
@@ -62,7 +60,6 @@ if st.session_state['transferrable_skills'] and timeline_input:
                 messages=MESSAGES
             )
         st.session_state['roadmap'] = json.loads(str(response.choices[0].message.content))
-        # st.write(st.session_state['roadmap'])
 
 if st.session_state['roadmap']:
     st.subheader("Your roadmap is ready!")
