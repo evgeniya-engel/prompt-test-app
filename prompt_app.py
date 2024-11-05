@@ -1,17 +1,14 @@
 import streamlit as st
 import json
-from dotenv import load_dotenv
-import os
 import ast
 
 import openai
 import prompt_library
 
 # Load environment variables from .env file
-load_dotenv()
  
 # Access the environment variables
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = st.secrets('OPENAI_API_KEY')
 client = openai.OpenAI()
 
 if 'completion_skills' not in st.session_state:
