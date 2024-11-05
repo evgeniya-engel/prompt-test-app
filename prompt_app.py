@@ -6,7 +6,7 @@ import openai
 import prompt_library
  
 # Access the environment variables
-openai.api_key = st.secrets["API_KEY"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 client = openai.OpenAI()
 
 if 'completion_skills' not in st.session_state:
