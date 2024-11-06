@@ -21,7 +21,7 @@ def get_roadmap_prompt(current_role, desired_role, transferrable_skills, timelin
              Skills: {transferrable_skills}
 
             Build a 5 step career transition roadmap that will help the user reach this goal within {timeline}.
-            Provide the result in json format following this structure:
+            Provide the result in json format following the structure below:
 
             {{"goals": 
             [ {{"goal_number": int, "goal_content": str,
@@ -32,5 +32,7 @@ def get_roadmap_prompt(current_role, desired_role, transferrable_skills, timelin
                 {{...}}, 
                 ... ] }}
                 "]
+
+            Only output json string. Do not include "```json\\n" and extra spaces.
             '''
         }
