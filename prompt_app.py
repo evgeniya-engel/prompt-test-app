@@ -34,8 +34,10 @@ if st.button("Analyze"):
             model="gpt-4-turbo",
             messages=MESSAGES
         ) 
-        st.write(response)
-        st.session_state['completion_skills'] = ast.literal_eval(response.choices[0].message.content)
+        if response.choices[0].message.content:
+            st.session_state['completion_skills'] = ast.literal_eval(response.choices[0].message.content)
+        else: 
+            st.text("Something went wrong, please try again.")
         MESSAGES.pop(-1)
 
     else:
@@ -51,6 +53,7 @@ if st.session_state['completion_skills']:
 if st.session_state['transferrable_skills']:
     timeline_input = st.selectbox("What time frame do you have in mind for a transition?",
                                 ["3 months", "6 months", "12 months", "18 months"])
+    st.write(f"You selected {timeline_input}")
 
 if st.session_state['transferrable_skills'] and timeline_input:
     if st.button("Generate Roadmap"):
@@ -59,7 +62,10 @@ if st.session_state['transferrable_skills'] and timeline_input:
                 model="gpt-4-turbo",
                 messages=MESSAGES
             )
-        st.session_state['roadmap'] = json.loads(str(response.choices[0].message.content))
+        if response.choices[0].message.content:
+            st.session_state['roadmap'] = json.loads(response.choices[0].message.content)
+        else: 
+            st.text("Something went wrong, please try again.")
 
 if st.session_state['roadmap']:
     st.subheader("Your roadmap is ready!")
